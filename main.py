@@ -12,12 +12,12 @@ from werkzeug.utils import secure_filename
 from flask import Response, request, abort, Flask
 from flask_cors import CORS
 
-#from routes.ButtonsFunctionality import buttons_functionality
+from routes.ButtonsFunctionality import buttons_functionality
 
 app = Flask(__name__)
 CORS(app)
 
-#app.register_blueprint(buttons_functionality)
+app.register_blueprint(buttons_functionality)
 @app.route('/')
 def index():
     return "Flask server is running!"
