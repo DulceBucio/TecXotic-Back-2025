@@ -81,15 +81,15 @@ def post(commands):
 
 def post_servo(position):
     print()
-    # url = 'http://192.168.5.1:8080/actuators'
-    # try:
-    #     data = {"actions": position} if isinstance(position, str) else {"actions": str(position)}
-    #     response = requests.post(url, json=data)
-    #     print("Data sent to actuators. Status code:", response.status_code)
-    #     if response.status_code != 200:
-    #         print("Error from server:", response.text)
-    # except requests.exceptions.RequestException as e:
-    #     print("Failed to send data to actuators:", e)
+    url = 'http://192.168.5.1:8080/actuators'
+    try:
+        data = {"actions": position} if isinstance(position, str) else {"actions": str(position)}
+        response = requests.post(url, json=data)
+        print("Data sent to actuators. Status code:", response.status_code)
+        if response.status_code != 200:
+            print("Error from server:", response.text)
+    except requests.exceptions.RequestException as e:
+        print("Failed to send data to actuators:", e)
 
 def handle_button_down(event):
     button_names = ["A", "B", "X", "Y", "LB", "RB"]
