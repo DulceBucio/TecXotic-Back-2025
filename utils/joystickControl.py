@@ -210,8 +210,8 @@ if __name__ == "__main__":
             'imu': True
         }   
         print("Iniciando programa.")
-        print(commands)
-        post(commands)
+        #print(commands)
+        #post(commands)
         post_servo(servo_position)
         counter += 1
     main()
