@@ -6,17 +6,20 @@ import json
 
 from werkzeug.utils import secure_filename
 from werkzeug.utils import secure_filename
+from routes.CamServer import camServer, cap1
 #from core.Server import run as websocket_server
 
 # Flask imports
-from flask import Response, request, abort, Flask
+from flask import Response, request, abort, Flask   
 from flask_cors import CORS
 
 from routes.ButtonsFunctionality import buttons_functionality
+from core.Server import run as websocket_server
 
 app = Flask(__name__)
 CORS(app)
 
+app.register_blueprint(camServer)
 app.register_blueprint(buttons_functionality)
 @app.route('/')
 def index():
@@ -32,6 +35,6 @@ if __name__ == '__main__':
         pass
     except Exception as e:
         print("Releasing video") #TODO: CHECK WHETHER THIS CODE IS TRULY EXECUTING
-        #cap1.release()
+        cap1.release()
         #cap2.release()
         pass
