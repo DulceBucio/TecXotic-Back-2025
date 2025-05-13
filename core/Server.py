@@ -38,13 +38,16 @@ async def echo(websocket, path):
             handle_pix_mode(commands['mode'])
             handle_motors_arming(commands["arm_disarm"])
 
-            # sensor data
-            imuVal = px.get_msg('AHRS2', timeout=0.5)
-            imu = {
-                "roll": imuVal['roll'],
-                "yaw": imuVal['yaw'],
-                "pitch": imuVal['pitch']
-            }
+            try:
+                imuVal = px.get_msg('AHRS2', timeout=0.5)
+                imu = {
+                    "roll": imuVal['roll'],
+                    "yaw": imuVal['yaw'],
+                    "pitch": imuVal['pitch']
+                }
+            except Exception as imu_error:
+                print(f"IMU data retrieval error: {imu_error}")
+                imu = {"roll": 0, "yaw": 0, "pitch": 0}
 
             send = {
                 "message_received": True,
@@ -61,3 +64,11 @@ async def echo(websocket, path):
     finally:
         clients.remove(websocket)
         px.disarm()
+
+def run():
+    start_server = websockets.serve(echo, '0.0.0.0', 55000)
+    asyncio.get_event_loop().run_until_complete(start_server)
+    asyncio.get_event_loop().run_forever()
+
+if __name__ == '__main__':
+    run()

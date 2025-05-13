@@ -27,7 +27,7 @@ void setup() {
 
   // Initialize positions
   board1.setPWM(0, 0, servoRoll);
-  board1.setPWM(15, 0, servoClaw);
+  board1.setPWM(14, 0, servoClaw);
 }
 
 void loop() {
@@ -81,7 +81,7 @@ void loop() {
   if (clawing) {
     servoClaw += 5 * clawDirection;
     servoClaw = constrain(servoClaw, SERVOCLAWMIN, SERVOCLAWMAX);
-    board1.setPWM(15, 0, servoClaw);
+    board1.setPWM(14, 0, servoClaw);
   }
 
   delay(200); // Adjust this to control movement speed
