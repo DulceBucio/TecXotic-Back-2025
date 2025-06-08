@@ -1,13 +1,13 @@
 from flask import Flask, request
 from flask_cors import CORS
-from routes.float import floatData
 from routes.eDNA import DNA
+from routes.floatData import floatData
 
 app = Flask(__name__)
 CORS(app)
 
 
-# app.register_blueprint(floatData)
+app.register_blueprint(floatData)
 app.register_blueprint(DNA)
 
 @app.route('/')

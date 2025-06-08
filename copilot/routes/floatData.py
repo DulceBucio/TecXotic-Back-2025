@@ -7,7 +7,7 @@ CORS(floatData)
 
 FILE_PATH = "received_data.txt"
 
-@floatData.route('/DNA', methods=['POST', 'GET'])
+@floatData.route('/upload', methods=['POST', 'GET'])
 def upload():
     if request.method == 'POST':
         data = request.data.decode('utf-8')
