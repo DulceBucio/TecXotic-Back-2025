@@ -1,8 +1,13 @@
-import cv2
+from flask import Flask, request, jsonify, Blueprint
+from PIL import Image
 import pytesseract
 from difflib import SequenceMatcher
+import io 
+from flask_cors import CORS
 
-# Define the full DNA sequences for each specimen
+DNA = Blueprint('DNA', __name__)
+CORS(DNA)
+
 specimens = {
     "Bighead Carp": "CTTCTGGTAGTACCTATATGGTTCAGTACATATTATGTATTATGTTACCTAATGTACTAATACCTATATATGTATTATCACCATTAATTTATTTTAACCTTAAAGCAAGTACTAACGTTTAAAAACGTACATAAACCAAAATATTAAGATTCATAAATAAATTATCTTAACTTAAATAAACAGATTATTCCACTAACAATTGATTCTCAAATTTATTACTGAATTATTAACTAAAATCTAACTCAAGTATATTATTAAAGTAAGAGACCACCTACTTATTTATATTAAGGTATTATATTCATGATAAGATCAAGGACAATAACAGTGGGGGTGGCGCAAAATGAACTATTACTTGCATCTGGTTTGGAATCTCACGGACATGGCTACAAAATTCCACCCCCGTTACATTATAACTGGCATATGGTTAAATGATGTGAGTACATACTCCTCATTAACCCCACATGCCGAGCATTCTTTTATATGCATAGGGGTTCTCCTTTTGGTTTCCTTTCACCTTGCATATCAGAGTGCAAGCTCAAATAGTAAAATAAGGTTGAACATATTCCTTGCTTGTGTTAAAGTAAGTTAATTATTAAAAGACATAACTTAAGAATTACATATTTCTCACTCAAGTGCATAACATATTCATTCTTTCTTCAACTTACCCCTATATATATGCCCCCCCTTTTGGCTTCTGCGCGACAAACCCCCCTACCCCCTACGCTCAGCAAATCCTGTTATCCTTGTCAAACCCCAAAACCAAGGAAGGTTCGAGAACGTGCAAGCTAACAAGTTGAAATATGGGTTAGCTATCCGCATTATATATATATATATACATACACATCACATCAATTTACCACATAATTCCCCAAACATTGACCTAAAAACCCCTATTAAATTTATAGGACATGCCCCAATGCTAAAAAGTCCAACATTATATAATGCTAG",
     "Silver Carp": "TCTTCTGATATAACCTATATGGTTTAATACATATATGTATTATATTACATAATGCATTAGTACTAGTATATGTATTATCACCATTCATTTATATTAACCTTAAAGCAAGTACTAACGTTTAAGACGTACATAAACCAAATATTTAAAATTCACAATTAATTTATTTAAACCTGAGAAAAGAGTTGTTCCACTATAATTGGTTCTCAAATATTTCCTTGAAATATTAACTTCTATTTAATTTAACTATATTAATGTAGTAAGAAACCACCTACTGGTTTATATTAAGGTATTCTATTCATGATAAGATCAGGGACAATAATCGTGGGGGTGGCGCAGAATGAACTATTACTTGCATTTGGCTTGGAATCTCACGGACATGACTGTAAAATTCCACCCTCCATACATTATATCTGGCATCTGGTTAAATGATGTGAGTACATACTCCTCATTAACCCCACATGCCGAGCATTCTTTTATATGCATAGGGGTTCTCCTTTTGGTTACCTTTCATCTTGCATATCAGAGTGCAGGCTCAAATGATAAATTAAGGTTGAACATATTCCTTGCTTAAGTTAAAGTAGGTTAATTATTGAAAGACATAACTTAAGAATTACATATTTTTAATTCAAGTGCATAACATATTATTCTTTCTTCAACTTACCCTTATATATATGCCCCCCTTTCGGTTTCTGCGCGACAAACCCCCTTACCCCCTACGCTCAACAAATCCTGTTATCCTTGTCAAACCCCAAAACCAAGGAAGGTTCGAGAACGTGCAAGCTAACAAGTTGAAATATGAGTTAGCTATCCGCATTATATATATATATATACATACACATCGCGTCAATTCGCCACATAATTCCCCAAATATAAACCTAAAAATTCCTATTAAATTTTAAGGGGCACGCCCCAATGCTAAAAAGTCCAACATTAAATAACGCTAGCGTAG",
@@ -26,51 +31,30 @@ def identify_specimen(partial_sequence):
 
     return identified_specimen, max_similarity
 
+@DNA.route('/DNA', methods=['POST'])
+def identify():
+    if 'image' not in request.files:
+        return jsonify({'error': 'No image provided'}), 400
 
+    image_file = request.files['image']
+    try:
+        image = Image.open(image_file.stream)
+    except Exception as e:
+        return jsonify({'error': f'Invalid image: {str(e)}'}), 400
 
-print("WEBCAM START")
-pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
-cong = r'--oem 1 --psm 6' #  outputbase digits'
-cam = cv2.VideoCapture(1)
+    extracted_text = pytesseract.image_to_string(image, config='--oem 1 --psm 6')
+    cleaned_sequence = ''.join(filter(str.isalpha, extracted_text)).upper()
 
+    if not cleaned_sequence:
+        return jsonify({'error': 'No valid DNA sequence found in image'}), 400
 
-while True:
-    ret, img = cam.read()
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    boxes = pytesseract.image_to_data(img, config=cong)
-    words = []
+    specimen, similarity = identify_specimen(cleaned_sequence)
 
-    for x, b in enumerate(boxes.splitlines()):
-        if x != 0:
-            b = b.split()
-            if len(b) == 12:
-                x, y, w, h = int(b[6]), int(b[7]), int(b[8]), int(b[9])
-                cv2.rectangle(img, (x, y), (w + x, h + y), (0, 255, 0), 1)
-                cv2.putText(img, b[11], (x, y), cv2.FONT_HERSHEY_COMPLEX, 0.45, (0, 255, 0), 1) # COLOR BLUEalv (50, 50, 255)
-                print(b)
-                words.append(b[11])
-    img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-    cv2.imshow("ALV", img)
-
-    key = cv2.waitKey(1)
-    if key == 112:
-        sentence = ''.join(words)
-        # pyttsx3.speak(sentence)
-        partial_sequence = sentence
-        specimen, similarity = identify_specimen(partial_sequence)
-        print(sentence)
-        print("Here it goes:")
-        print(f"The partial sequence belongs to: {specimen} (Similarity: {similarity:.2%})")
-        print("here it ednsd")
-        break
-
-
-    if key == 27 or key == ord('q'):
-        break
-
-cam.release()
-cv2.destroyAllWindows()
-
+    return jsonify({
+        'sequence': cleaned_sequence,
+        'specimen': specimen,
+        'similarity': round(similarity * 100, 2)
+    })
 
 
 
