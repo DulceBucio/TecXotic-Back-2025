@@ -1,0 +1,25 @@
+
+
+
+
+
+Pressure: 17660.10 mbar
+Temperature: 27.01 °C
+Depth: 170.26 m
+Altitude: -32018.61 m
+
+Pressure: 17660.20 mbar
+Temperature: 27.00 °C
+Depth: 170.26 m
+Altitude: -32018.69 m
+
+Pressure: 17660.50 mbar
+Temperature: 26.98 °C
+Depth: 170.27 m
+Altitude: -32018.94 m
+
+Pressure: 17660.70 mbar
+Temperature: 26.97 °C
+Depth: 170.27 m
+Altitude: -32019.10 m
+
