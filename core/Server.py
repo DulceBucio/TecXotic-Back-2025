@@ -7,6 +7,14 @@ from websockets.exceptions import ConnectionClosedOK, ConnectionClosedError
 
 px = Pixhawk(direction='/dev/serial/by-id/usb-ArduPilot_Pixhawk1_2A0025000851323438393232-if00')
 
+try:
+    arduino = serial.Serial(port='/dev/ttyTHS1', baudrate=9600)
+except Exception as e:
+    print("ERROR in ButtonsFunctionality.py, serial route not founded: " + str(e))
+
+def send(message):
+    arduino.write(bytes(message, 'utf-8'))
+
 def handle_motors_arming(cmd):
     try:
         if cmd != px.get_pix_info()['is_armed']:
@@ -29,6 +37,12 @@ async def echo(websocket, path):
         async for message in websocket:
             commands = json.loads(message)
             print(commands)
+            arduino_cmd = str(commands.get('arduino', '')).strip()
+            if arduino_cmd:
+                arduino.write(f"{commands['arduino']}\n".encode('utf-8')) # Append newline
+                print("Sent to Arduino:", arduino_cmd)
+            else:
+                print("No Arduino command found in payload.")
 
             # px control
             px.drive_manual(

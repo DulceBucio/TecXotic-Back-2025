@@ -5,11 +5,9 @@ Adafruit_PWMServoDriver board1 = Adafruit_PWMServoDriver(0x40);
 // Initial servo positions
 int servoClaw1 = 315;
 int servoRoll = 210;
-int servoClaw2 = 400;
 
 int servoRollPin = 0;
 int servoClaw1Pin = 7;
-int servoClaw2Pin = 8;
 
 // Limits
 #define SERVOCLAW1MIN  310
@@ -18,9 +16,6 @@ int servoClaw2Pin = 8;
 #define SERVOROLLMIN  80
 #define SERVOROLLMAX  340
 
-#define SERVOCLAW2MIN 390
-#define SERVOCLAW2MAX 450
-
 // Control flags
 bool rolling = false;
 int rollDirection = 0; // -1 for LEFT, 1 for RIGHT
@@ -28,8 +23,6 @@ int rollDirection = 0; // -1 for LEFT, 1 for RIGHT
 bool clawing = false;
 int clawDirection = 0; // -1 for CLOSE, 1 for OPEN
 
-bool claw2 = false; 
-int claw2Direction = 0;
 
 void setup() {
   Serial.begin(9600);
@@ -39,7 +32,6 @@ void setup() {
   // Initialize positions
   board1.setPWM(servoRollPin, 0, servoRoll);
   board1.setPWM(servoClaw1Pin, 0, servoClaw1);
-  board1.setPWM(servoClaw2Pin, 0, servoClaw2);
 }
 
 void loop() {
@@ -72,12 +64,6 @@ void loop() {
     else if (cmd == 5) { // CLAW1 CLOSE
       clawing = true;
       clawDirection = -1;
-    } else if (cmd == 6) { // CLAW2 OPEN
-      claw2 = true;
-      claw2Direction = 1;
-    } else if (cmd == 7) { // CLAW2 CLOSE
-      claw2 = true;
-      claw2Direction = -1;
     } else if (cmd >= 0 && cmd <= 180) {
       // Map angle (0-180) to pulse width for servoRoll
       int pwm = map(cmd, 0, 180, SERVOROLLMIN, SERVOROLLMAX);
@@ -99,12 +85,6 @@ void loop() {
     servoClaw1 += 5 * clawDirection;
     servoClaw1 = constrain(servoClaw1, SERVOCLAW1MIN, SERVOCLAW1MAX);
     board1.setPWM(servoClaw1Pin, 0, servoClaw1);
-  }
-
-  if (claw2) {
-    servoClaw2 += 5 *claw2Direction;
-    servoClaw2 = constrain(servoClaw2, SERVOCLAW2MIN, SERVOCLAW2MAX);
-    board1.setPWM(servoClaw2Pin, 0, servoClaw2);
   }
   delay(200); // Adjust this to control movement speed
 }
