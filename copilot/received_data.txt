@@ -1,212 +1,94 @@
-"hola"
----
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
+
 
 ---
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
+
 
 ---
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
+
 
 ---
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
+
 
 ---
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
+
 
 ---
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
+
 
 ---
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
+
 
 ---
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
+[2025-06-14 19:33:08]
 
 ---
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
+[2025-06-14 19:46:26]
 
 ---
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
+[2025-06-14 19:46:50]
 
 ---
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
+[2025-06-14 19:47:19]
 
 ---
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
+[2025-06-14 19:48:11]
 
 ---
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
-
+[2025-06-14 20:03:29]
+EX 22,2025-06-15 02:03:19,0.00,-10.33
 ---
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
-
+[2025-06-14 20:04:24]
+EX 22,2025-06-15 02:03:44,0.00,-10.33
+EX 22,2025-06-15 02:03:49,0.00,-10.33
+EX 22,2025-06-15 02:03:54,0.00,-10.33
+EX 22,2025-06-15 02:03:59,0.00,-10.33
+EX 22,2025-06-15 02:04:04,0.00,-10.33
+EX 22,2025-06-15 02:04:09,0.00,-10.33
+EX 22,2025-06-15 02:04:14,0.00,-10.33
+EX 22,2025-06-15 02:04:19,0.00,-10.33
 ---
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
-
+[2025-06-14 20:11:57]
+EX 22,2025-06-15 02:11:46,0.00,-10.33
 ---
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
-
+[2025-06-14 20:12:49]
+EX 22,2025-06-15 02:12:09,0.00,-10.33
+EX 22,2025-06-15 02:12:14,0.00,-10.33
+EX 22,2025-06-15 02:12:19,0.00,-10.33
+EX 22,2025-06-15 02:12:24,0.00,-10.33
+EX 22,2025-06-15 02:12:29,0.00,-10.33
+EX 22,2025-06-15 02:12:34,0.00,-10.33
+EX 22,2025-06-15 02:12:39,0.00,-10.33
+EX 22,2025-06-15 02:12:44,0.00,-10.33
 ---
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
-
+[2025-06-14 20:26:44]
+EX 22,2025-06-15 02:26:34,0.00,-10.33
 ---
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
-
+[2025-06-14 20:27:53]
+EX 22,2025-06-15 02:26:58,0.00,-10.33
+EX 22,2025-06-15 02:27:03,0.00,-10.33
+EX 22,2025-06-15 02:27:08,0.00,-10.33
+EX 22,2025-06-15 02:27:13,0.00,-10.33
+EX 22,2025-06-15 02:27:18,0.00,-10.33
+EX 22,2025-06-15 02:27:23,0.00,-10.33
+EX 22,2025-06-15 02:27:28,0.00,-10.33
+EX 22,2025-06-15 02:27:33,0.00,-10.33
+EX 22,2025-06-15 02:27:38,0.00,-10.33
+EX 22,2025-06-15 02:27:43,0.00,-10.33
+EX 22,2025-06-15 02:27:48,0.00,-10.33
 ---
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
-
+[2025-06-14 23:13:01]
+EX 22,2025-06-15 05:12:51,0.00,-10.33
 ---
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
-
----
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
-
----
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
-
----
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
-
----
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
-
----
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
-
----
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
-
----
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
-
----
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
-
----
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
-
----
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
-
----
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
-
----
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
-
----
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
-
----
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
-
----
-Pressure: 1.00 mbar
-Temperature: 2.00 °C
-Depth: 3.00 m
-Altitude: 4.00 m
-
+[2025-06-14 23:14:40]
+EX 22,2025-06-15 05:13:45,0.00,-10.33
+EX 22,2025-06-15 05:13:50,0.00,-10.33
+EX 22,2025-06-15 05:13:55,0.00,-10.33
+EX 22,2025-06-15 05:14:00,0.00,-10.33
+EX 22,2025-06-15 05:14:05,0.00,-10.33
+EX 22,2025-06-15 05:14:10,0.00,-10.33
+EX 22,2025-06-15 05:14:15,0.00,-10.33
+EX 22,2025-06-15 05:14:20,0.00,-10.33
+EX 22,2025-06-15 05:14:25,0.00,-10.33
+EX 22,2025-06-15 05:14:30,0.00,-10.33
+EX 22,2025-06-15 05:14:35,0.00,-10.33
 ---
