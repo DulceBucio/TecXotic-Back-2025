@@ -35,16 +35,16 @@ Servo servo3;
 Servo servo4;
 
 // Potenciometros (analógicos)
-const int potPin1 = A0;
-const int potPin2 = A1;
-const int potPin3 = A2;
-const int potPin4 = A3;
+const int potPin1 = A0; // naranja blanco
+const int potPin2 = A1; // full naranja
+const int potPin3 = A2; // azul blanco
+const int potPin4 = A4; // full azul
 
 // Servos (rositas)
-const int servoPin1 = 9;
-const int servoPin2 = 10;
-const int servoPin3 = 11;
-const int servoPin4 = 12;
+const int servoPin1 = 10;
+const int servoPin2 = 6;
+const int servoPin3 = 9;
+const int servoPin4 = 11;
 
 // Rangos
 int minValue1 = 177;  // Rango mínimo del potenciómetro 1
@@ -58,6 +58,14 @@ int maxValue3 = 880;  // Rango máximo del potenciómetro 3
 
 int minValue4 = 0;  // Rango mínimo del potenciómetro 4
 int maxValue4 = 1023;  // Rango máximo del potenciómetro 4
+
+// Lineal 
+int pinLinealOpen = 2;
+int pinLinealClose = 4;
+
+// Flags 
+bool opening = false;
+bool closing = false;
 
 void setup() {
   Serial.begin(9600);
@@ -73,11 +81,16 @@ void setup() {
   servo2.attach(servoPin2);
   servo3.attach(servoPin3);
   servo4.attach(servoPin4);
+
+  // pines del brazo/motor lineal
+  pinMode(pinLinealOpen, OUTPUT);
+  pinMode(pinLinealClose, OUTPUT);
 }
 
 void loop() {
 
   handleArm();
+
   // Recibir comando desde la jetson por serial
   if (Serial.available() > 0) {
     String command = Serial.readStringUntil('\n');
@@ -108,7 +121,11 @@ void loop() {
     else if (cmd == 5) { // CLAW1 CLOSE
       clawing = true;
       clawDirection = -1;
-    } else if (cmd >= 0 && cmd <= 180) {
+    } else if (cmd == 6) {
+      opening = true;
+    } else if (cmd == 7) {
+      closing = true;
+    }else if (cmd >= 0 && cmd <= 180) {
       // Map angle (0-180) to pulse width for servoRoll
       int pwm = map(cmd, 0, 180, SERVOROLLMIN, SERVOROLLMAX);
       rolling = false;
@@ -129,6 +146,15 @@ void loop() {
     servoClaw1 += 5 * clawDirection;
     servoClaw1 = constrain(servoClaw1, SERVOCLAW1MIN, SERVOCLAW1MAX);
     board1.setPWM(servoClaw1Pin, 0, servoClaw1);
+  }
+
+  // Handle opening arm
+  if (opening) {
+    digitalWrite(pinLinealOpen, HIGH);
+  }
+
+  if (closing) {
+    digitalWrite(pinLinealClose, HIGH);
   }
   delay(100); // Adjust this to control movement speed
 }

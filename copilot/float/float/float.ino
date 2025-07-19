@@ -44,19 +44,6 @@ const char* serverURL = "http://172.20.10.14:8080";
 
 /* FUNCIONES PARA SUBIR/BAJAR BOYA*/
 
-void float_first_sequence() {
-  // dejamos caer por unos segundos, pero mientras guardamos datos
-  Serial.println("entra aquí");
-  storeSensorData();
-  delay(10000);
-
-  // volvemos a subir para mandar datos
-  float_setup();
-  Serial.println("sube");
-  sendAllStoredData();
-  floatFirstSequence = false;
-
-}
 void float_setup() {
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
@@ -376,14 +363,9 @@ void loop() {
     lastWiFiCheck = millis();
   }
 
-  if (floatFirstSequence) {
-    float_first_sequence();
-  }
-  
-  while(floatSetupActive) {
-    checkForCommands();
-    delay(2000);
-  }
+  delay(30000);
 
-  delay(1000);
+  float_setup();
+
+  delay(20000);
 }

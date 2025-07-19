@@ -47,6 +47,8 @@ def send_actions():
         "CLAW_MIDOPEN" : "3",
         "CLAW_OPEN" :"4",
         "CLAW_CLOSE" : "5", 
+        "ARM_OPEN": "6",
+        "ARM_CLOSE": "7",
     }
 
     command = command_map.get(action)
